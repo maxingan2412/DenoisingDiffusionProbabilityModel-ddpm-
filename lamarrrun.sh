@@ -2,7 +2,7 @@
 #SBATCH --job-name=DDIM
 #SBATCH --time=72:00:00
 #SBATCH --gpus=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=4
 #SBATCH --output=out/DDIM-%j.out
 #SBATCH --error=out/DDIM-%j.err
 
@@ -46,7 +46,7 @@ function execute_and_log {
 
 # 执行命令
 execute_and_log "nvidia-smi"
-execute_and_log "/home/ma1/anaconda3/envs/vitnew/bin/python MainCondition.py --batch_size 900"
+execute_and_log "/home/ma1/anaconda3/envs/vitnew/bin/python MainCondition.py --batch_size 800"
 
 # 记录结束时间
 echo "Experiment ended at $(date +"%Y-%m-%d %H:%M:%S")" >> "$LOG_FILE"
