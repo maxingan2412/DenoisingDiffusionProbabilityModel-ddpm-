@@ -1,10 +1,10 @@
 #!/bin/bash
-#SBATCH --job-name=DDIM
+#SBATCH --job-name=vit_48_bs_100
 #SBATCH --time=72:00:00
 #SBATCH --gpus=1
 #SBATCH --cpus-per-task=4
-#SBATCH --output=out/DDIM-%j.out
-#SBATCH --error=out/DDIM-%j.err
+#SBATCH --output=out/vit_48_bs_100-%j.out
+#SBATCH --error=out/vit_48_bs_100-%j.err
 
 
 # 获取当前日期和时间
@@ -45,8 +45,9 @@ function execute_and_log {
 (sleep 300 && nvidia-smi) >> "$LOG_FILE" 2>&1 &
 
 # 执行命令
+echo "setting : xxxxx" >> "$LOG_FILE"
 execute_and_log "nvidia-smi"
-execute_and_log "/home/ma1/anaconda3/envs/vitnew/bin/python MainCondition.py --batch_size 800"
+execute_and_log "/home/ma1/anaconda3/envs/vitnew/bin/python -u MainCondition.py --batch_size 800"
 
 # 记录结束时间
 echo "Experiment ended at $(date +"%Y-%m-%d %H:%M:%S")" >> "$LOG_FILE"
